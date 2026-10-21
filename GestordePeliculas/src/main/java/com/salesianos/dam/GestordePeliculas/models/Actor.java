@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,12 +20,9 @@ public class Actor {
     @Id @GeneratedValue
     private Long id;
     private String name;
-    @ManyToMany
-    @JoinTable(name = "reparto",
-            joinColumns = @JoinColumn(name = "peliculaId"),
-            inverseJoinColumns = @JoinColumn(name = "actorId")
-    )
-    private Pelicula pelicula;
+    @ManyToMany(mappedBy = "actores")
+    @Builder.Default
+    private Set<Pelicula> peliculas = new HashSet<>();
     /*
     Relación muchos a muchos con pelicula
      */

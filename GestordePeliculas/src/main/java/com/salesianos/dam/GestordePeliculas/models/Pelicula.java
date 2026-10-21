@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,18 +23,22 @@ public class Pelicula {
     private String titulo;
     private String genero;
     private LocalDate fechaEstreno;
-    @ManyToMany
-    @JoinTable(name = "reparto",
-            joinColumns = @JoinColumn(name = "actorId"),
-            inverseJoinColumns = @JoinColumn(name = "peliculaId")
-    )
-    private Actor actor;
-    @ManyToOne
-    @JoinColumn(name = "director_id")
-    private Director director;
 
     /*
-    Asociación un director dirige muchas películas
-     */
+   Asociación un director dirige muchas películas
+    */
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "director_id", nullable = false)
+    private Director director;
+
+    @ManyToMany
+    @JoinTable(name = "reparto",
+            joinColumns = @JoinColumn(name = "pelicula_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    @Builder.Default
+    private Set<Actor> actores = new HashSet<>();
+
+
 
 }
