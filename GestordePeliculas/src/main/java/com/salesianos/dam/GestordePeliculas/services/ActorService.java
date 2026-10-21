@@ -29,6 +29,7 @@ public class ActorService {
     public Actor addActor(Actor actor) {
         return actorRepository.save(actor);
     }
+    
     /*LOS MÉTODOS EDITAR NO PUEDO HACERLOS HASTA QUE TENGA EL DTO
     public Actor editarActor(Long id, Actor datos) {
         Actor actor = buscarPorId(id);
