@@ -1,28 +1,43 @@
 package com.salesianos.dam.GestordePeliculas.dto.dtoPelicula;
 
-public class EditarPeliculaDto {
+import com.salesianos.dam.GestordePeliculas.models.Director;
+import com.salesianos.dam.GestordePeliculas.models.Pelicula;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-    @NotBlank(message = "El título no puede estar vacío")
-    String titulo,
+import java.time.LocalDate;
 
-    @NotBlank(message = "El género no puede estar vacío")
-    String genero,
+public record EditarPeliculaDto(
 
-    @NotNull(message = "La fecha de estreno es obligatoria")
-    LocalDate fechaEstreno,
+        @NotBlank(message = "El título no puede estar vacío")
+        String titulo,
 
+        @NotBlank(message = "El género no puede estar vacío")
+        String genero,
+
+        @NotNull(message = "La fecha de estreno es obligatoria")
+        LocalDate fechaEstreno,
+
+        @NotNull(message = "El id del director es obligatorio")
+        @Positive(message = "El id del director debe ser positivo")
+        Long directorId
 
 ) {
 
-        public Pelicula to() {
-            return Pelicula.builder()
-                    .titulo(titulo)
-                    .genero(genero)
-                    .fechaEstreno(fechaEstreno)
-                    .build();
-        }
-
-
-
+    public Pelicula to() {
+        return Pelicula.builder()
+                .titulo(titulo)
+                .genero(genero)
+                .fechaEstreno(fechaEstreno)
+                .build();
+    }
 
 }
+
+
+
+
+
+
+

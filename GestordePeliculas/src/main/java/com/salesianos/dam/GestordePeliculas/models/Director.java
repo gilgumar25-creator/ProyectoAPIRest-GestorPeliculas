@@ -21,4 +21,8 @@ public class Director {
     private String name;
     private Integer anioNacimiento;
 
+    @OneToMany(mappedBy = "director")
+    @Builder.Default
+    private List<Pelicula> peliculas = new ArrayList<>();
+
 }
