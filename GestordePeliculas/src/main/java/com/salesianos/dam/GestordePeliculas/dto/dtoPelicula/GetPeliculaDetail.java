@@ -21,7 +21,7 @@ public record GetPeliculaDetail (
         LocalDate fechaEstreno
 
 ){
-    
+
 }
 
 

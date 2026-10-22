@@ -1,6 +1,7 @@
 package com.salesianos.dam.GestordePeliculas.services;
 
 
+import com.salesianos.dam.GestordePeliculas.dto.dtoActor.EditarActorDto;
 import com.salesianos.dam.GestordePeliculas.error.ActorNotFoundException;
 import com.salesianos.dam.GestordePeliculas.models.Actor;
 import com.salesianos.dam.GestordePeliculas.models.Director;
@@ -17,7 +18,7 @@ public class ActorService {
 
     private final ActorRepository actorRepository;
 
-    public List<Actor> listar() {
+    public List<Actor> listarActores() {
         return actorRepository.findAll();
     }
 
@@ -38,6 +39,21 @@ public class ActorService {
     }
 
      */
+
+    public Actor updateActor(Long id, EditarActorDto editarActorDto) {
+
+        return actorRepository.findById(id)
+                .map(p -> {
+                    p.setName(editarActorDto.name());
+                    return actorRepository.save(p);
+                })
+                .orElseThrow(() -> new ActorNotFoundException(id));
+    }
+
+    public void deleteActor(Long id) {
+        buscarPorId(id);
+        actorRepository.deleteById(id);
+    }
 }
 
 

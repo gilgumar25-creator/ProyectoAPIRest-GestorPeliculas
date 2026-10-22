@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import com.salesianos.dam.GestordePeliculas.models.Actor;
 
 import java.util.List;
-import java.util.Set;
 
 @Schema(name = "GetActorDetail", description = "Datos de un actor")
 public record GetActorDetail(

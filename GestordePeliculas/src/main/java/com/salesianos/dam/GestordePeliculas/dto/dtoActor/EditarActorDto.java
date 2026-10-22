@@ -8,7 +8,6 @@ public record EditarActorDto(
         @NotBlank(message = "El nombre no puede estar vacío")
         String name
 
-
 ) {
 
     public Actor to() {
