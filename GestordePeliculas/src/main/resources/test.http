@@ -1,0 +1,175 @@
+
+
+@baseUrl = http://localhost:8080
+
+### Listar directores
+GET {{baseUrl}}/api/v1/directores
+
+### Crear director
+POST {{baseUrl}}/api/v1/directores
+Content-Type: application/json
+
+{
+  "name": "Ridley Scott",
+  "anioNacimiento": 1937
+}
+
+### Obtener director por id
+GET {{baseUrl}}/api/v1/directores/{{directorId}}
+
+### Editar director
+PUT {{baseUrl}}/api/v1/directores/{{directorId}}
+Content-Type: application/json
+
+{
+  "name": "Ridley Scott",
+  "anioNacimiento": 1937
+}
+
+
+### [Error 400] Crear director sin nombre
+POST {{baseUrl}}/api/v1/directores
+Content-Type: application/json
+
+{
+  "name": "",
+  "anioNacimiento": 1980
+}
+
+### [Error 404] Obtener director inexistente
+GET {{baseUrl}}/api/v1/directores/99999
+
+### Listar actores
+GET {{baseUrl}}/api/v1/actores
+
+
+### Crear actor
+POST {{baseUrl}}/api/v1/actores
+Content-Type: application/json
+
+{
+  "name": "Russell Crowe"
+}
+
+
+### Obtener actor por id
+GET {{baseUrl}}/api/v1/actores/{{actorId}}
+
+### Editar actor
+PUT {{baseUrl}}/api/v1/actores/{{actorId}}
+Content-Type: application/json
+
+{
+  "name": "Russell Crowe"
+}
+
+### [Error 400] Crear actor sin nombre
+POST {{baseUrl}}/api/v1/actores
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### [Error 404] Obtener actor inexistente
+GET {{baseUrl}}/api/v1/actores/99999
+
+### Listar películas
+GET {{baseUrl}}/api/v1/peliculas
+
+### Crear película
+POST {{baseUrl}}/api/v1/peliculas
+Content-Type: application/json
+
+{
+  "titulo": "Gladiator",
+  "genero": "Acción",
+  "fechaEstreno": "2000-05-05",
+  "directorId": {{directorId}}
+}
+
+### Obtener película con reparto
+GET {{baseUrl}}/api/v1/peliculas/{{peliculaId}}
+
+### Editar película
+PUT {{baseUrl}}/api/v1/peliculas/{{peliculaId}}
+Content-Type: application/json
+
+{
+  "titulo": "Gladiator",
+  "genero": "Drama histórico",
+  "fechaEstreno": "2000-05-05",
+  "directorId": {{directorId}}
+}
+
+### Añadir actor al reparto
+POST {{baseUrl}}/api/v1/peliculas/{{peliculaId}}/actores/{{actorId}}
+
+### [Error 409] Añadir actor ya en el reparto
+POST {{baseUrl}}/api/v1/peliculas/{{peliculaId}}/actores/{{actorId}}
+
+
+### [Error 409] Crear película con título repetido
+POST {{baseUrl}}/api/v1/peliculas
+Content-Type: application/json
+
+{
+  "titulo": "Gladiator",
+  "genero": "Acción",
+  "fechaEstreno": "2000-05-05",
+  "directorId": {{directorId}}
+}
+
+
+### [Error 404] Crear película con director inexistente
+POST {{baseUrl}}/api/v1/peliculas
+Content-Type: application/json
+
+{
+  "titulo": "Película Sin Director",
+  "genero": "Drama",
+  "fechaEstreno": "2020-01-01",
+  "directorId": 99999
+}
+
+
+### [Error 400] Crear película sin título
+POST {{baseUrl}}/api/v1/peliculas
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "genero": "Drama",
+  "fechaEstreno": "2020-01-01",
+  "directorId": {{directorId}}
+}
+
+### [Error 400] Crear película con director menor de 18 años en el estreno
+POST {{baseUrl}}/api/v1/peliculas
+Content-Type: application/json
+
+{
+  "titulo": "Película Director Menor",
+  "genero": "Drama",
+  "fechaEstreno": "2010-01-01",
+  "directorId": {{youngDirectorId}}
+}
+
+### [Error 404] Obtener película inexistente
+GET {{baseUrl}}/api/v1/peliculas/99999
+
+
+### [Error 404] Añadir actor inexistente
+POST {{baseUrl}}/api/v1/peliculas/{{peliculaId}}/actores/99999
+
+### Eliminar película
+DELETE {{baseUrl}}/api/v1/peliculas/{{peliculaId}}
+
+### Eliminar actor
+DELETE {{baseUrl}}/api/v1/actores/{{actorId}}
+
+### Eliminar director
+DELETE {{baseUrl}}/api/v1/directores/{{directorId}}
+
+### Eliminar director joven
+DELETE {{baseUrl}}/api/v1/directores/{{youngDirectorId}}
